@@ -1,0 +1,55 @@
+<div>
+    <form [formGroup]="doctorForm" class="example-form">
+        <mat-form-field class="example-full-width">
+          <mat-label>ID</mat-label>
+          <input matInput formControlName="id"  >
+        </mat-form-field>
+      
+        <mat-form-field class="example-full-width">
+          <mat-label>Name</mat-label>
+          <input matInput formControlName="dName" >
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <mat-label>DOB</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="dob" >
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <mat-label>Gender</mat-label>
+            <input matInput formControlName="gender" >
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <mat-label>Qualification</mat-label>
+            <input matInput formControlName="qualification" >
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <mat-label>Specialist</mat-label>
+            <input matInput formControlName="specialist" >
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <mat-label>Experience</mat-label>
+            <input matInput formControlName="experience" >
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <mat-label>Appointment Date</mat-label>
+            <input matInput [matDatepicker]="appDatePicker" formControlName="appointmentDate" >
+            <mat-datepicker-toggle matSuffix [for]="appDatePicker"></mat-datepicker-toggle>
+            <mat-datepicker #appDatePicker></mat-datepicker>
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <mat-label>Address</mat-label>
+            <input matInput formControlName="address" >
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <mat-label>Number</mat-label>
+            <input matInput formControlName="number" >
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <mat-label>E-mail</mat-label>
+            <input matInput formControlName="mailId" >
+          </mat-form-field>
+        <button mat-raised-button color="primary" (click)="submit()">Submit</button>
+        <button mat-raised-button color="primary" (click)="initializeForm()">Reset</button>
+      </form>      
+</div>
