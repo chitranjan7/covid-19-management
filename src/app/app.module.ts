@@ -18,6 +18,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatRadioModule } from '@angular/material/radio';
+import {MatTable, MatTableModule} from '@angular/material/table';
+import { DoctorFormComponent } from './doctor-form/doctor-form.component'
 
 @NgModule({
   declarations: [
@@ -27,7 +29,8 @@ import { MatRadioModule } from '@angular/material/radio';
     DoctorComponent,
     NurseComponent,
     PatientComponent,
-    ReportComponent
+    ReportComponent,
+    DoctorFormComponent
   ],
   imports: [ 
     BrowserModule,
@@ -41,6 +44,7 @@ import { MatRadioModule } from '@angular/material/radio';
     MatMomentDateModule,
     MatNativeDateModule,
     MatRadioModule,
+    MatTableModule,
     MatInputModule
   ],
   providers: [],

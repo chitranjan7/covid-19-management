@@ -1,1 +1,59 @@
-<p>patient works!</p>
+<div>
+    <form [formGroup]="patientForm" class="example-form">
+        <mat-form-field class="example-full-width">
+          <mat-label>ID</mat-label>
+          <input matInput formControlName="id"  >
+        </mat-form-field>
+      
+        <mat-form-field class="example-full-width">
+          <mat-label>Name</mat-label>
+          <input matInput formControlName="pName" >
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <mat-label>DOB</mat-label>
+            <input matInput [matDatepicker]="dobPicker" formControlName="dob" >
+            <mat-datepicker-toggle matSuffix [for]="dobPicker"></mat-datepicker-toggle>
+            <mat-datepicker #dobPicker></mat-datepicker>
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <mat-label>Gender</mat-label>
+            <input matInput formControlName="gender" >
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <mat-label>Father's Name</mat-label>
+            <input matInput formControlName="fName" >
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+         <mat-label>Blood Group</mat-label>
+            <input matInput formControlName="bGroup" >
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <mat-label>Address</mat-label>
+            <input matInput formControlName="address" >
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <mat-label>Number</mat-label>
+            <input matInput formControlName="contactNo" >
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <mat-label>Hospital Name</mat-label>
+            <input matInput formControlName="hospitalName" >
+          </mat-form-field>
+                <mat-form-field class="example-full-width">
+       <mat-label>Ward No</mat-label>
+          <input matInput formControlName="wardNo" >
+        </mat-form-field>
+          <mat-form-field class="example-full-width">
+     <mat-label>Covid Testing</mat-label>
+      <input matInput formControlName="covidTesting" >
+     </mat-form-field>
+     <mat-form-field class="example-full-width">
+        <mat-label>Date</mat-label>
+            <input matInput [matDatepicker]="appDatePicker" formControlName="date" >
+            <mat-datepicker-toggle matSuffix [for]="appDatePicker"></mat-datepicker-toggle>
+            <mat-datepicker #appDatePicker></mat-datepicker>
+                </mat-form-field>
+        <button mat-raised-button color="primary" (click)="submit()">Submit</button>
+        <button mat-raised-button color="primary" (click)="initializeForm()">Reset</button>
+      </form>      
+</div>

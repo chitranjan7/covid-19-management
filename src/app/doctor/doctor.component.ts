@@ -1,5 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+
+
+
+const ELEMENT_DATA = [
+  {address: "21, 3rd cross",
+  appointmentDate: "Fri Feb 26 2021 ",
+  dName: "Rajan",
+  dob: "Tue Jul 12 1983  ",
+  experience: "5 Years",
+  gender: "Male",
+  id: "2",
+  mailId: "Rajan24@gmail.com",
+  number: "9876213422",
+  qualification: "MBBS",
+  specialist: "Neuro"},
+];
 
 @Component({
   selector: 'app-doctor',
@@ -7,30 +22,15 @@ import { FormBuilder, FormGroup } from '@angular/forms';
   styleUrls: ['./doctor.component.scss']
 })
 export class DoctorComponent implements OnInit {
-  doctorForm: FormGroup;
-  constructor(private formBuilder: FormBuilder) { }
-
+ 
+  displayedColumns: string[] = ['id','dName','dob','gender','qualification','specialist','experience','appointmentDate','address','number','mailId'];
+  dataSource = ELEMENT_DATA;
+  constructor() { }
+ 
   ngOnInit(): void {
-    this.initializeForm();
+    
   }
-  submit(): void {
-    console.log("doctorform",this.doctorForm)
-  }
-  initializeForm(): void {
-    this.doctorForm = this.formBuilder.group({
-      id: [''],
-      dName: [''],
-      dob: [''],
-      gender: [''],
-      qualification: [''],
-      specialist: [''],
-      experience: [''],
-      appointmentDate: [''],
-      address: [''],
-      number: [''],
-      mailId: [''],
-    })
-  }
+  
   
 
   

@@ -6,6 +6,7 @@ import { DoctorComponent} from './doctor/doctor.component'
 import { NurseComponent} from './nurse/nurse.component'
 import {PatientComponent} from './patient/patient.component'
 import {ReportComponent} from './report/report.component'
+import {DoctorFormComponent} from './doctor-form/doctor-form.component'
 const routes: Routes = [
   {
     path:'',
@@ -17,7 +18,20 @@ const routes: Routes = [
   },
   {
     path:'doctor',
-    component: DoctorComponent
+    children: [
+      {
+        path: '', // child route path
+        component: DoctorComponent, // child route component that the router renders
+      },
+      {
+        path: 'add', // child route path
+        component: DoctorFormComponent, // child route component that the router renders
+      },
+      {
+        path: 'edit',
+        component: DoctorFormComponent, // another child route component that the router renders
+      },
+    ],
   },
   {
     path:'nurse',

@@ -1,5 +1,5 @@
-<div>
-    <form [formGroup]="nurseForm" class="example-form">
+<div> 
+    <form [formGroup]="doctorForm" class="example-form">
         <mat-form-field class="example-full-width">
           <mat-label>ID</mat-label>
           <input matInput formControlName="id"  >
@@ -7,7 +7,7 @@
       
         <mat-form-field class="example-full-width">
           <mat-label>Name</mat-label>
-          <input matInput formControlName="nName" >
+          <input matInput formControlName="dName" >
         </mat-form-field>
         <mat-form-field class="example-full-width">
             <mat-label>DOB</mat-label>
@@ -24,7 +24,11 @@
             <input matInput formControlName="qualification" >
           </mat-form-field>
           <mat-form-field class="example-full-width">
-         <mat-label>Experience</mat-label>
+            <mat-label>Specialist</mat-label>
+            <input matInput formControlName="specialist" >
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <mat-label>Experience</mat-label>
             <input matInput formControlName="experience" >
           </mat-form-field>
           <mat-form-field class="example-full-width">
@@ -47,5 +51,5 @@
           </mat-form-field>
         <button mat-raised-button color="primary" (click)="submit()">Submit</button>
         <button mat-raised-button color="primary" (click)="initializeForm()">Reset</button>
-      </form>      
+      </form>   
 </div>
