@@ -22,6 +22,7 @@ import {MatTable, MatTableModule} from '@angular/material/table';
 import { DoctorFormComponent } from './doctor-form/doctor-form.component';
 import { NurseFormComponent } from './nurse-form/nurse-form.component';
 import { PatientFormComponent } from './patient-form/patient-form.component';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { PatientFormComponent } from './patient-form/patient-form.component';
     MatNativeDateModule,
     MatRadioModule,
     MatTableModule,
+    MatCheckboxModule,
     MatInputModule
   ],
   providers: [],

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 const ELEMENT_DATA = [
   {address: "35, 4th Cross St.",
@@ -21,13 +22,28 @@ wardNo: "3"},
   styleUrls: ['./report.component.scss']
 })
  export class ReportComponent implements OnInit {
-
+  patientForm: FormGroup;
   displayedColumns: string[] = ['id','pName','dob','gender','fName','bGroup','address','number','hospitalName','wardNo','covidTesting','date'];
   dataSource = ELEMENT_DATA;
-  constructor() { }
+  
+  constructor(private formBuilder: FormBuilder) { }
   
   ngOnInit(): void {
-  
+    this.initializeForm();
   }
+  initializeForm(): void {
+    this.patientForm = this.formBuilder.group({
+      admit: [''],
+      positive: [false],
+      negative: [false],
+      homeQuarantine: [false],
+      death: [false],
+         })
+  }
+  toggleCheckBox(fieldName,status): void{ 
+    console.log("positive",fieldName,status) 
+    this.patientForm.get(fieldName).setValue(status)
+    console.log(this.patientForm)
+  } 
   
   } 
