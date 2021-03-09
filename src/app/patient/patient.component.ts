@@ -1,5 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+
+const ELEMENT_DATA = [
+  {address: "35, 4th Cross St.",
+bGroup: "A-",
+contactNo: "9842555768",
+covidTesting: "positive",
+date: "Fri Feb 19 2021",
+dob: "Thu Jun 24 1982", 
+fName: "Muthu",
+gender: "male",
+hospitalName: "Ganga Hospital",
+id: "25",
+pName: "Siva",
+wardNo: "3"},
+];
 
 @Component({
   selector: 'app-patient',
@@ -7,35 +21,16 @@ import { FormBuilder, FormGroup } from '@angular/forms';
   styleUrls: ['./patient.component.scss']
 })
  export class PatientComponent implements OnInit {
-  patientForm: FormGroup;
-  constructor(private formBuilder : FormBuilder) { }
 
+  displayedColumns: string[] = ['id','pName','dob','gender','fName','bGroup','address','number','hospitalName','wardNo','covidTesting','date'];
+  dataSource = ELEMENT_DATA;
+  constructor() { }
+  
   ngOnInit(): void {
-    this.initializeForm();
-  }
-  submit() : void{
-    console.log("patientForm",this.patientForm)
-   }
-    initializeForm(): void {
-    this.patientForm = this.formBuilder.group({
-      id: [''],
-      pName: [''],
-      dob: [''],
-      gender: [''],
-      fName: [''],
-      bGroup: [''],
-      address: [''],
-      contactNo: [''],
-      hospitalName: [''],
-      wardNo: [''],
-      covidTesting: [''],
-      date: [''],
-  })
-  
-  
   
   }
   
-  }
+  } 
+
 
  

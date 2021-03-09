@@ -19,7 +19,9 @@ import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatRadioModule } from '@angular/material/radio';
 import {MatTable, MatTableModule} from '@angular/material/table';
-import { DoctorFormComponent } from './doctor-form/doctor-form.component'
+import { DoctorFormComponent } from './doctor-form/doctor-form.component';
+import { NurseFormComponent } from './nurse-form/nurse-form.component';
+import { PatientFormComponent } from './patient-form/patient-form.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { DoctorFormComponent } from './doctor-form/doctor-form.component'
     NurseComponent,
     PatientComponent,
     ReportComponent,
-    DoctorFormComponent
+    DoctorFormComponent,
+    NurseFormComponent,
+    PatientFormComponent
   ],
   imports: [ 
     BrowserModule,

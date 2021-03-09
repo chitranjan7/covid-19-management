@@ -1,5 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+
+ const ELEMENT_DATA = [
+  {id: "3",
+  nName: "Varsha",
+  dob: "14-04-1992",
+  gender: "female",
+  qualification: "B.Sc_Nursing",
+  experience: "6 Years",
+  appointmentDate: "02-03-2021",
+  address: "4, Murugan Kovil St.,Kottar",
+  number: "8440034190",
+  mailId: "varsha14@gmail.com"},
+ ];
 
 @Component({
   selector: 'app-nurse',
@@ -7,28 +19,13 @@ import { FormBuilder, FormGroup } from '@angular/forms';
   styleUrls: ['./nurse.component.scss']
 })
 export class NurseComponent implements OnInit {
-  nurseForm: FormGroup;
-  constructor(private formBuilder : FormBuilder) { }
+  
+  displayedColumns: string[] = ['id','nName','dob','gender','qualification','experience','appointmentDate','address','number','mailId'];
+  dataSource = ELEMENT_DATA;
+  constructor() { }
 
   ngOnInit(): void {
-    this.initializeForm();
-  }
-submit() : void{
-  console.log("nurseForm",this.nurseForm)
-}
-initializeForm(): void {
-  this.nurseForm = this.formBuilder.group({
-    id: [''],
-    nName: [''],
-    dob: [''],
-    gender: [''],
-    qualification: [''],
-    experience: [''],
-    appointmentDate: [''],
-    address: [''],
-    number: [''],
-    mailId: [''],
-})
+    
 
 
 
