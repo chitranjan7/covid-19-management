@@ -1,6 +1,8 @@
 const express = require('express');
+const cors = require('cors');
 
 const app = express();
+app.use(cors())
 console.log('working');
 
 app.get('/doctor',function(req , res){
@@ -26,7 +28,18 @@ app.get('/doctor',function(req , res){
         mailId: "Rajan24@gmail.com",
         number: "9876213422",
         qualification: "MBBS",
-        specialist: "Neuro"}
+        specialist: "Neuro"},
+        {address: "21, 3rd cross",
+        appointmentDate: "Fri Feb 26 2021 ",
+        dName: "Rajan",
+        dob: "Tue Jul 12 1983  ",
+        experience: "5 Years",
+        gender: "Male",
+        id: "2",
+        mailId: "Rajan24@gmail.com",
+        number: "9876213422",
+        qualification: "MBBS",
+        specialist: "Neuro"},
       ];
       
 
