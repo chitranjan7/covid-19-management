@@ -15,15 +15,15 @@ export class DoctorService {
   }
 
   addDoctor(id,data): Observable <any> {
-    return this.http.get('http://localhost:9000/add/'+id)
+    return this.http.get('http://localhost:9000/doctor/add/'+id)
   }
 
   updateDoctor(id,data): Observable <any> {
-    return this.http.get('http://localhost:9000/update/'+id)
+    return this.http.get('http://localhost:9000/doctor/update/'+id)
   }
 
   deleteDoctor(id): Observable <any> {
-    return this.http.get('http://localhost:9000/delete/'+id)
+    return this.http.get('http://localhost:9000/doctor/delete/'+id)
   }
 
   getDoctor(id): Observable <any> {

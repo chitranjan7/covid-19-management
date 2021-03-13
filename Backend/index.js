@@ -1,8 +1,10 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 const cors = require('cors');
 
 const app = express();
 app.use(cors())
+app.use(bodyParser.json())
 console.log('working');
 
 app.get('/doctor',function(req , res){
@@ -65,19 +67,20 @@ app.get('/doctor/:id',function(req , res){
 
 app.get('/doctor/add/:id',function(req , res){
     const id = req.params.id
-     res.send ("the doctor added ..." + id)
+    console.log("Doctor added")
+     res.send (true)
  }
  )
 
  app.get('/doctor/update/:id',function(req , res){
     const id = req.params.id
-     res.send ("the doctor updated ..." + id)
+     res.send (true)
  }
  )
 
  app.get('/doctor/delete/:id',function(req , res){
     const id = req.params.id
-     res.send ("the doctor deleted ..." + id)
+     res.send (true)
  }
  )
 
@@ -128,19 +131,19 @@ app.get('/doctor/add/:id',function(req , res){
  
  app.get('/nurse/add/:id',function(req , res){
      const id = req.params.id
-      res.send ("the nurse added ..." + id)
+      res.send (true)
   }
   )
  
   app.get('/nurse/update/:id',function(req , res){
      const id = req.params.id
-      res.send ("the nurse updated ..." + id)
+      res.send (true)
   }
   )
  
   app.get('/nurse/delete/:id',function(req , res){
      const id = req.params.id
-      res.send ("the nurse deleted ..." + id)
+      res.send (true)
   }
   )
 
@@ -209,19 +212,19 @@ app.get('/doctor/add/:id',function(req , res){
  
  app.get('/patient/add/:id',function(req , res){
      const id = req.params.id
-      res.send ("the patient added ..." + id)
+      res.send (true)
   }
   )
  
   app.get('/patient/update/:id',function(req , res){
      const id = req.params.id
-      res.send ("the patient updated ..." + id)
+      res.send (true)
   }
   )
  
   app.get('/patient/delete/:id',function(req , res){
      const id = req.params.id
-      res.send ("the patient deleted ..." + id)
+      res.send (true)
   }
   )
 

@@ -1,17 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {NurseService} from 'src/app/services/nurse.service'
 
- const ELEMENT_DATA = [
-  {id: "3",
-  nName: "Varsha",
-  dob: "14-04-1992",
-  gender: "female",
-  qualification: "B.Sc_Nursing",
-  experience: "6 Years",
-  appointmentDate: "02-03-2021",
-  address: "4, Murugan Kovil St.,Kottar",
-  number: "8440034190",
-  mailId: "varsha14@gmail.com"},
- ];
 
 @Component({
   selector: 'app-nurse',
@@ -21,14 +10,14 @@ import { Component, OnInit } from '@angular/core';
 export class NurseComponent implements OnInit {
   
   displayedColumns: string[] = ['id','nName','dob','gender','qualification','experience','appointmentDate','address','number','mailId'];
-  dataSource = ELEMENT_DATA;
-  constructor() { }
+  dataSource = [];
+  constructor(private NurseService: NurseService) { }
 
   ngOnInit(): void {
+    this.NurseService.getNurseList().subscribe(nurseList => {
+      this.dataSource=nurseList
+    })
     
+ }
 
-
-
-}
-
-}
+ }

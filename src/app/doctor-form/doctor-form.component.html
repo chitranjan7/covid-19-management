@@ -51,5 +51,7 @@
           </mat-form-field>
         <button mat-raised-button color="primary" (click)="submit()">Submit</button>
         <button mat-raised-button color="primary" (click)="initializeForm({})">Reset</button>
+        <button mat-raised-button color="primary" (click)="deleteDoctor()">Delete</button>
+        <button mat-raised-button color="primary" [routerLink]="['/doctor']">Cancel</button>
       </form>   
 </div>
