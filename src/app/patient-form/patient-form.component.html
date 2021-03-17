@@ -53,9 +53,12 @@
           <mat-datepicker-toggle matSuffix [for]="appDatePicker"></mat-datepicker-toggle>
           <mat-datepicker #appDatePicker></mat-datepicker>
               </mat-form-field>
-      <button mat-raised-button color="primary" (click)="submit()">Submit</button>
-      <button mat-raised-button color="primary" (click)="initializeForm({})">Reset</button>
-      <button mat-raised-button color="primary" (click)="deletePatient()">Delete</button>
-        <button mat-raised-button color="primary" [routerLink]="['/patient']">Cancel</button>
+      
     </form>      
+    <div class="buttonContainer">
+      <button mat-raised-button color="primary" class="formBtn" (click)="submit()">Submit</button>
+      <button mat-raised-button color="primary" class="formBtn" (click)="initializeForm({})">Reset</button>
+      <button mat-raised-button color="primary" class="formBtn" (click)="deletePatient()">Delete</button>
+        <button mat-raised-button color="primary" class="formBtn" [routerLink]="['/patient']">Cancel</button>
+    </div>
 </div>

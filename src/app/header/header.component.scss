@@ -1,24 +1,41 @@
+.headerContainer, .overlay {
+    height: 250px;
+}
+
 .headerContainer {
-    height: 80px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
     background: gray;
     box-shadow: 2px 2px 5px rgb(68 68 68 / 60%);
     background: rgb(255,255,255);
     background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgb(217 217 217) 100%);
     margin-bottom: 10px;
+    background-image: url(https://assets.publishing.service.gov.uk/government/uploads/system/uploads/image_data/file/66746/s960_hospital_operating_theatre.jpg);
+    clip-path: polygon(0 0, 0 79vw, 0vh 236px, 315vw 0);
 }
 
 .headerContentWrapper{
     display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 80px;
+}
+.headerContent{
+    display: flex;
     justify-content: space-between;
+    z-index: 1;
+}
+
+.overlay{
+    background: #00000082;
+    width: 100vw;
+    position: absolute;
+    top: 0;
 }
 
 .linksContainer {
     width: 70%;
     display: flex;
     justify-content: space-around;
+    color: white;
 }
 
 .link{
