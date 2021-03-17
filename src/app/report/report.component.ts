@@ -1,20 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-
-const ELEMENT_DATA = [
-  {address: "35, 4th Cross St.",
-bGroup: "A-",
-contactNo: "9842555768",
-covidTesting: "positive",
-date: "Fri Feb 19 2021",
-dob: "Thu Jun 24 1982", 
-fName: "Muthu",
-gender: "male",
-hospitalName: "Ganga Hospital",
-id: "25",
-pName: "Siva",
-wardNo: "3"},
-];
+import { ReportService } from 'src/app/services/report.service'
 
 @Component({
   selector: 'app-report',
@@ -24,12 +10,15 @@ wardNo: "3"},
  export class ReportComponent implements OnInit {
   patientForm: FormGroup;
   displayedColumns: string[] = ['id','pName','dob','gender','fName','bGroup','address','number','hospitalName','wardNo','covidTesting','date'];
-  dataSource = ELEMENT_DATA;
+  dataSource = [];
   
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder, private reportService: ReportService) { }
   
   ngOnInit(): void {
     this.initializeForm();
+    this.reportService.getreportList().subscribe(reportList => {
+      this.dataSource = reportList;
+    })
   }
   initializeForm(): void {
     this.patientForm = this.formBuilder.group({

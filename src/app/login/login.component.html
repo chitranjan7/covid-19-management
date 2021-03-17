@@ -1,5 +1,6 @@
 <div>
-    <form [formGroup]="loginForm" class="example-form">
+  <div class="login-form-container">
+    <form [formGroup]="loginForm" class="login-form">
         <mat-form-field class="example-full-width">
           <mat-label>User Name</mat-label>
           <input matInput formControlName="userName" placeholder="User Name" >
@@ -10,5 +11,6 @@
           <input matInput formControlName="password" placeholder="password">
         </mat-form-field>
         <button mat-raised-button color="primary" (click)="submit()">Login</button>
-      </form>      
+      </form> 
+  </div>     
 </div>

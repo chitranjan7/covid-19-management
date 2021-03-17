@@ -1,7 +1,20 @@
-.example-form {
+.login-form-container{
+  // background: black;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-form {
     min-width: 150px;
     max-width: 500px;
     width: 100%;
+    background: white;
+    padding: 40px;
+    box-shadow: 2px 2px 5px rgb(68 68 68 / 60%);
   }
   
   .example-full-width {

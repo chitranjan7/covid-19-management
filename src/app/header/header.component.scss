@@ -1,0 +1,27 @@
+.headerContainer {
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: gray;
+    box-shadow: 2px 2px 5px rgb(68 68 68 / 60%);
+    background: rgb(255,255,255);
+    background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgb(217 217 217) 100%);
+    margin-bottom: 10px;
+}
+
+.headerContentWrapper{
+    display: flex;
+    justify-content: space-between;
+}
+
+.linksContainer {
+    width: 70%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.link{
+    cursor: pointer;
+    text-decoration: none;
+}

@@ -23,7 +23,8 @@ import { DoctorFormComponent } from './doctor-form/doctor-form.component';
 import { NurseFormComponent } from './nurse-form/nurse-form.component';
 import { PatientFormComponent } from './patient-form/patient-form.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
-import {HttpClientModule} from '@angular/common/http'
+import {HttpClientModule} from '@angular/common/http';
+import { HeaderComponent } from './header/header.component'
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import {HttpClientModule} from '@angular/common/http'
     ReportComponent,
     DoctorFormComponent,
     NurseFormComponent,
-    PatientFormComponent
+    PatientFormComponent,
+    HeaderComponent
   ],
   imports: [ 
     BrowserModule,

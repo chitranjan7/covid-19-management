@@ -228,6 +228,51 @@ app.get('/doctor/add/:id',function(req , res){
   }
   )
 
+  app.get('/reports',function(req , res){
+    const ELEMENT_DATA = [
+        {address: "35, 4th Cross St.",
+      bGroup: "A-",
+      contactNo: "9842555768",
+      covidTesting: "positive",
+      date: "Fri Feb 19 2021",
+      dob: "Thu Jun 24 1982", 
+      fName: "Muthu",
+      gender: "male",
+      hospitalName: "Ganga Hospital",
+      id: "25",
+      pName: "Siva",
+      wardNo: "3"},
+      {address: "35, 4th Cross St.",
+      bGroup: "A-",
+      contactNo: "9842555768",
+      covidTesting: "positive",
+      date: "Fri Feb 19 2021",
+      dob: "Thu Jun 24 1982", 
+      fName: "Muthu",
+      gender: "male",
+      hospitalName: "Ganga Hospital",
+      id: "25",
+      pName: "Siva",
+      wardNo: "3"},
+      {address: "35, 4th Cross St.",
+      bGroup: "A-",
+      contactNo: "9842555768",
+      covidTesting: "positive",
+      date: "Fri Feb 19 2021",
+      dob: "Thu Jun 24 1982", 
+      fName: "Muthu",
+      gender: "male",
+      hospitalName: "Ganga Hospital",
+      id: "25",
+      pName: "Siva",
+      wardNo: "3"}
+      ];
+      
+
+     res.send (ELEMENT_DATA)
+ }
+ )
+
 app.listen(9000, function(req,res){
     console.log('Running...')
 });

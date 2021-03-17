@@ -1,6 +1,7 @@
-<div>
-  <button mat-raised-button color="primary" [routerLink]="['/doctor/add']">Add</button>
-          <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+<div class="pageContainer">
+  <div class="pageTitle">Doctor List</div>
+  <button mat-raised-button color="primary" class="newButton" [routerLink]="['/doctor/add']">Add new Doctor</button>
+          <table mat-table [dataSource]="dataSource" class="mainTable mat-elevation-z8">
 
         <!--- Note that these columns can be defined in any order.
               The actual rendered columns are set as a property on the row definition" -->
