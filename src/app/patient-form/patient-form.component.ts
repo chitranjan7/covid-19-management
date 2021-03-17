@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import {PatientService} from 'src/app/services/patient.service'
+import { Router,NavigationEnd  } from '@angular/router';
 
 @Component({
   selector: 'app-patient-form',
@@ -9,8 +10,20 @@ import {PatientService} from 'src/app/services/patient.service'
 })
 export class PatientFormComponent implements OnInit {
   patientForm: FormGroup;
+  formType: string;
+  constructor(private formBuilder: FormBuilder,private patientService: PatientService, private router: Router) {
+    router.events
+          .subscribe(event => 
+           {
+             if(event instanceof NavigationEnd){
+               const path= event.url.split('/');
+               this.formType= path[path.length-1]
+                  
+              }
+              
+           });
 
-  constructor(private formBuilder: FormBuilder,private patientService: PatientService) { }
+   }
 
   ngOnInit(): void {
     this.initializeForm({});
@@ -21,6 +34,17 @@ export class PatientFormComponent implements OnInit {
   }
   submit(): void {
     console.log("patientform",this.patientForm)
+    if(this.formType=='edit') {
+      this.patientService.updatePatient(1,this.patientForm.value).subscribe(result =>{
+        console.log("updated patient")
+      })
+    }
+    else{
+      this.patientService.addPatient(1,this.patientForm.value).subscribe(result =>{
+        console.log("Patient added")
+      })
+    }
+
 }
 initializeForm(patientData): void {
   this.patientForm = this.formBuilder.group({
@@ -37,5 +61,12 @@ initializeForm(patientData): void {
     covidTesting: [''||patientData.covidTesting],
     date: [''||patientData.date],
   })
+}
+
+deletePatient() : void {
+  console.log("delete patient")
+  this.patientService.deletePatient(1)
+  this.router.navigate(['/patient'])
+
 }
 }
