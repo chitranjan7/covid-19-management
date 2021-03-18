@@ -15,11 +15,11 @@ export class DoctorService {
   }
 
   addDoctor(id,data): Observable <any> {
-    return this.http.get('http://localhost:9000/doctor/add/'+id)
+    return this.http.post('http://localhost:9000/doctor/add/'+id, data)
   }
 
   updateDoctor(id,data): Observable <any> {
-    return this.http.get('http://localhost:9000/doctor/update/'+id)
+    return this.http.post('http://localhost:9000/doctor/update/'+id, data)
   }
 
   deleteDoctor(id): Observable <any> {

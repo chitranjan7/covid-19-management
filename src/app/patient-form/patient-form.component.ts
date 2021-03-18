@@ -11,14 +11,24 @@ import { Router,NavigationEnd  } from '@angular/router';
 export class PatientFormComponent implements OnInit {
   patientForm: FormGroup;
   formType: string;
+  id: string = null;
   constructor(private formBuilder: FormBuilder,private patientService: PatientService, private router: Router) {
+    const state = this.router.getCurrentNavigation().extras.state;
     router.events
           .subscribe(event => 
            {
              if(event instanceof NavigationEnd){
                const path= event.url.split('/');
                this.formType= path[path.length-1]
-                  
+               console.log(this.formType)
+               if (this.formType === "edit" && !this.id) {
+                 if (state && state.data.id) {
+                   this.id = state.data.id;
+                   this.patientService.getPatient(this.id).subscribe(patientData =>{
+                    this.initializeForm(patientData);
+                  })
+                 }
+               }
               }
               
            });
@@ -27,21 +37,20 @@ export class PatientFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.initializeForm({});
-    this.patientService.getPatient(1).subscribe(patientData =>{
-      this.initializeForm(patientData);
-    })
-
   }
+
   submit(): void {
     console.log("patientform",this.patientForm)
     if(this.formType=='edit') {
-      this.patientService.updatePatient(1,this.patientForm.value).subscribe(result =>{
+      this.patientService.updatePatient(this.id, this.patientForm.value).subscribe(result =>{
         console.log("updated patient")
+        this.router.navigate(['/patient'])
       })
     }
     else{
-      this.patientService.addPatient(1,this.patientForm.value).subscribe(result =>{
+      this.patientService.addPatient(this.patientForm.value.id,this.patientForm.value).subscribe(result =>{
         console.log("Patient added")
+        this.router.navigate(['/patient'])
       })
     }
 
@@ -64,9 +73,10 @@ initializeForm(patientData): void {
 }
 
 deletePatient() : void {
-  console.log("delete patient")
-  this.patientService.deletePatient(1)
-  this.router.navigate(['/patient'])
+  this.patientService.deletePatient(this.id).subscribe(res => {
+    console.log("deleted patient")
+    this.router.navigate(['/patient'])
+  })
 
 }
 }

@@ -15,11 +15,11 @@ export class PatientService {
   }
 
   addPatient(id,data): Observable <any> {
-    return this.http.get('http://localhost:9000/patient/add/'+id)
+    return this.http.post('http://localhost:9000/patient/add/'+id, data)
   }
 
   updatePatient(id,data): Observable <any> {
-    return this.http.get('http://localhost:9000/patient/update/'+id)
+    return this.http.post('http://localhost:9000/patient/update/'+id, data)
   }
 
   deletePatient(id): Observable <any> {

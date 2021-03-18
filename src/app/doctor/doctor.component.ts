@@ -22,7 +22,7 @@ export class DoctorComponent implements OnInit {
   }
     editDoctor(data) : void {
     console.log("edit doctor",data)
-        this.router.navigate(['/doctor/edit'])
+        this.router.navigate(['/doctor/edit'],{state: { data: { id: data.id} }})
   }
   
   

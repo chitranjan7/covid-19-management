@@ -11,14 +11,24 @@ import { Router,NavigationEnd  } from '@angular/router';
 export class NurseFormComponent implements OnInit {
   nurseForm: FormGroup;
   formType: string;
+  id: string = null;
   constructor(private formBuilder: FormBuilder,private nurseService: NurseService, private router: Router) { 
+    const state = this.router.getCurrentNavigation().extras.state;
     router.events
           .subscribe(event => 
            {
              if(event instanceof NavigationEnd){
                const path= event.url.split('/');
                this.formType= path[path.length-1]
-                  
+               console.log(this.formType)
+               if (this.formType === "edit" && !this.id) {
+                 if (state && state.data.id) {
+                   this.id = state.data.id;
+                   this.nurseService.getNurse(this.id).subscribe(nurseData =>{
+                    this.initializeForm(nurseData);
+                  })
+                 }
+               }
               }
               
            });
@@ -26,22 +36,19 @@ export class NurseFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.initializeForm({});
-    if(this.formType=='edit') {
-    this.nurseService.getNurse(1).subscribe(nurseData =>{
-      this.initializeForm(nurseData);
-    })
-   }
-      }
+  }
       submit(): void {
         console.log("nurseform",this.nurseForm)
         if(this.formType=='edit') {
-          this.nurseService.updateNurse(1,this.nurseForm.value).subscribe(result =>{
+          this.nurseService.updateNurse(this.id,this.nurseForm.value).subscribe(result =>{
             console.log("updated nurse")
+            this.router.navigate(['/nurse'])
           })
         }
         else{
-          this.nurseService.addNurse(1,this.nurseForm.value).subscribe(result =>{
+          this.nurseService.addNurse(this.nurseForm.value.id, this.nurseForm.value).subscribe(result =>{
             console.log("Nurse added")
+            this.router.navigate(['/nurse'])
           })
         }
     }
@@ -60,9 +67,10 @@ export class NurseFormComponent implements OnInit {
       })
 }
 deleteNurse() : void {
-  console.log("delete nurse")
-  this.nurseService.deleteNurse(1)
-  this.router.navigate(['/nurse'])
+  this.nurseService.deleteNurse(this.id).subscribe(res => {
+    console.log("deleted nurse")
+    this.router.navigate(['/nurse'])
+  })
 
 }
 }

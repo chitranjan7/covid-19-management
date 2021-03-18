@@ -11,41 +11,44 @@ import { Router,NavigationEnd  } from '@angular/router';
 export class DoctorFormComponent implements OnInit {
   doctorForm: FormGroup;
   formType: string;
-  constructor(private formBuilder: FormBuilder,private doctorService:DoctorService,private router: Router) { 
-    router.events
-          .subscribe(event => 
-           {
-             if(event instanceof NavigationEnd){
-               const path= event.url.split('/');
-               this.formType= path[path.length-1]
-                  
-              }
-              
-           });
+  id: string = null;
+  constructor(private formBuilder: FormBuilder,private doctorService:DoctorService,private router: Router) {
+    const state = this.router.getCurrentNavigation().extras.state;
     
+    router.events
+      .subscribe(event => {
+        if (event instanceof NavigationEnd) {
+          const path = event.url.split('/');
+          this.formType = path[path.length - 1]
+          console.log(this.formType)
+          if (this.formType === "edit" && !this.id) {
+            if (state && state.data.id) {
+              this.id = state.data.id;
+              this.doctorService.getDoctor(this.id).subscribe(doctorData =>{
+                console.log('doctorData',doctorData)
+                this.initializeForm(doctorData);
+              })
+            }
+          }
+        }
+      });    
   }
 
   ngOnInit(): void {
     this.initializeForm({});
-    if(this.formType=='edit') {
-      this.doctorService.getDoctor(1).subscribe(doctorData =>{
-        this.initializeForm(doctorData);
-      })
-
-    }
-
-    
   }
   submit(): void {
     console.log("doctorform",this.doctorForm)
     if(this.formType=='edit') {
-      this.doctorService.updateDoctor(1,this.doctorForm.value).subscribe(result =>{
+      this.doctorService.updateDoctor(this.id, this.doctorForm.value).subscribe(result =>{
         console.log("updated doctor")
+        this.router.navigate(['/doctor'])
       })
     }
     else{
-      this.doctorService.addDoctor(1,this.doctorForm.value).subscribe(result =>{
+      this.doctorService.addDoctor(this.doctorForm.value.id, this.doctorForm.value).subscribe(result =>{
         console.log("Doctor added")
+        this.router.navigate(['/doctor'])
       })
     }
     
@@ -66,9 +69,12 @@ export class DoctorFormComponent implements OnInit {
     })
   }
   deleteDoctor() : void {
-    console.log("delete doctor")
-    this.doctorService.deleteDoctor(1)
-    this.router.navigate(['/doctor'])
+    
+    this.doctorService.deleteDoctor(this.id).subscribe(doctorList => {
+      console.log("deleted doctor")
+      this.router.navigate(['/doctor'])
+    })
+    
 
   }
 

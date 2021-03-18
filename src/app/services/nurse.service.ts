@@ -14,11 +14,11 @@ export class NurseService {
   }
 
   addNurse(id,data): Observable <any> {
-    return this.http.get('http://localhost:9000/nurse/add/'+id)
+    return this.http.post('http://localhost:9000/nurse/add/'+id, data)
   }
 
   updateNurse(id,data): Observable <any> {
-    return this.http.get('http://localhost:9000/nurse/update/'+id)
+    return this.http.post('http://localhost:9000/nurse/update/'+id, data)
   }
 
   deleteNurse(id): Observable <any> {

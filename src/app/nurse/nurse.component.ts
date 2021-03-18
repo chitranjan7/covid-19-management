@@ -23,7 +23,7 @@ export class NurseComponent implements OnInit {
 
  editNurse(data) : void {
   console.log("edit nurse",data)
-      this.router.navigate(['/nurse/edit'])
+      this.router.navigate(['/nurse/edit'],{state: { data: { id: data.id} }})
 }
 
  }

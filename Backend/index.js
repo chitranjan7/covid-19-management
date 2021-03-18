@@ -1,277 +1,301 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+let mongoose = require('mongoose');
 
 const app = express();
 app.use(cors())
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 app.use(bodyParser.json())
 console.log('working');
 
-app.get('/doctor',function(req , res){
-    const ELEMENT_DATA = [
-        {address: "21, 3rd cross",
-        appointmentDate: "Fri Feb 26 2021 ",
-        dName: "Rajan",
-        dob: "Tue Jul 12 1983  ",
-        experience: "5 Years",
-        gender: "Male",
-        id: "2",
-        mailId: "Rajan24@gmail.com",
-        number: "9876213422",
-        qualification: "MBBS",
-        specialist: "Neuro"},
-        {address: "21, 3rd cross",
-        appointmentDate: "Fri Feb 26 2021 ",
-        dName: "Rajan",
-        dob: "Tue Jul 12 1983  ",
-        experience: "5 Years",
-        gender: "Male",
-        id: "2",
-        mailId: "Rajan24@gmail.com",
-        number: "9876213422",
-        qualification: "MBBS",
-        specialist: "Neuro"},
-        {address: "21, 3rd cross",
-        appointmentDate: "Fri Feb 26 2021 ",
-        dName: "Rajan",
-        dob: "Tue Jul 12 1983  ",
-        experience: "5 Years",
-        gender: "Male",
-        id: "2",
-        mailId: "Rajan24@gmail.com",
-        number: "9876213422",
-        qualification: "MBBS",
-        specialist: "Neuro"},
-      ];
-      
+mongoose.connect('mongodb://localhost/resthub', { useNewUrlParser: true});
+var db = mongoose.connection;
 
-     res.send (ELEMENT_DATA)
+// Added check for DB connection
+if(!db)
+    console.log("Error connecting db")
+else
+    console.log("Db connected successfully")
+
+const doctorSchema = mongoose.model('doctor', {
+    address: { type: String },
+    appointmentDate: { type: String },
+    dName: { type: String },
+    dob: { type: String },
+    experience: { type: String },
+    gender: { type: String },
+    id: { type: String },
+    mailId: { type: String },
+    number: { type: String },
+    qualification: { type: String },
+    specialist: { type: String }
+})
+
+const nurseSchema = mongoose.model('nurse', {
+  id: { type: String },
+  nName: { type: String },
+  dob: { type: String },
+  gender: { type: String },
+  qualification: { type: String },
+  experience: { type: String },
+  appointmentDate: { type: String },
+  address: { type: String },
+  number: { type: String },
+  mailId: { type: String }
+})
+
+const patientSchema = mongoose.model('patient', {
+  address: { type: String },
+  bGroup: { type: String },
+  contactNo: { type: String },
+  covidTesting: { type: String },
+  date: { type: String },
+  dob: { type: String }, 
+  fName: { type: String },
+  gender: { type: String },
+  hospitalName: { type: String },
+  id: { type: String },
+  pName: { type: String },
+  wardNo: { type: String }
+})
+
+app.get('/doctor',function(req , res){
+  doctorSchema.find({}, function (err, docs) { 
+    if (err){ 
+        console.log(err); 
+        res.send (err)
+    } 
+    else{ 
+        console.log("First function call : ", docs); 
+        res.send (docs)
+    } 
+    });
  }
  )
 app.get('/doctor/:id',function(req , res){
    const id = req.params.id
-   const doctor = {address: "21, 3rd cross",
-   appointmentDate: "Fri Feb 26 2021 ",
-   dName: "Rajan",
-   dob: "Tue Jul 12 1983  ",
-   experience: "5 Years",
-   gender: "Male",
-   id: "2",
-   mailId: "Rajan24@gmail.com",
-   number: "9876213422",
-   qualification: "MBBS",
-   specialist: "Neuro"}
-    res.send (doctor)
+   doctorSchema.find({ id: id}, function (err, docs) { 
+    if (err){ 
+        console.log(err); 
+        res.send (err)
+    } 
+    else{ 
+        console.log("First function call : ", docs); 
+        res.send (docs.length ? docs[0] : {})
+    } 
+    }); 
+    
 }
 )
 
-app.get('/doctor/add/:id',function(req , res){
-    const id = req.params.id
-    console.log("Doctor added")
-     res.send (true)
- }
- )
+//add condition
+app.post('/doctor/add/:id',function(req , res){
+  const id = req.params.id
+  var doctor = new doctorSchema(req.body)
+  doctor.save(function (err, result) {
+    if (err) {
+      console.log(err);
+      res.send(err);
+    }
+    else {
+      console.log(result)
+      res.send(result);
+    }
+  })
+}
+)
 
- app.get('/doctor/update/:id',function(req , res){
-    const id = req.params.id
-     res.send (true)
- }
- )
+app.post('/doctor/update/:id', function (req, res) {
+  const id = req.params.id
+  doctorSchema.findOneAndUpdate({ id: id },
+    req.body, null, function (err, docs) {
+      if (err) {
+        console.log(err)
+        res.send(err)
+      }
+      else {
+        console.log("Original Doc : ", docs);
+        res.send(docs)
+      }
+    })
+}
+)
 
- app.get('/doctor/delete/:id',function(req , res){
-    const id = req.params.id
-     res.send (true)
- }
- )
+app.get('/doctor/delete/:id', function (req, res) {
+  const id = req.params.id
+  doctorSchema.deleteOne({ id: id }).then(function () {
+    console.log("Data deleted"); // Success 
+    res.send(true)
+  }).catch(function (error) {
+    console.log(error); // Failure 
+    res.send(error)
+  });
+  
+}
+)
 
  app.get('/nurse',function(req , res){
-    const ELEMENT_DATA = [
-        {id: "3",
-        nName: "Varsha",
-        dob: "14-04-1992",
-        gender: "female",
-        qualification: "B.Sc_Nursing",
-        experience: "6 Years",
-        appointmentDate: "02-03-2021",
-        address: "4, Murugan Kovil St.,Kottar",
-        number: "8440034190",
-        mailId: "varsha14@gmail.com"},
-        {id: "3",
-        nnNnName: "Varsha",
-        dob: "14-04-1992",
-        gender: "female",
-        qualification: "B.Sc_Nursing",
-        experience: "6 Years",
-        appointmentDate: "02-03-2021",
-        address: "4, Murugan Kovil St.,Kottar",
-        number: "8440034190",
-        mailId: "varsha14@gmail.com"}
-            ];
-      
-
-     res.send (ELEMENT_DATA)
+  nurseSchema.find({}, function (err, docs) { 
+    if (err){ 
+        console.log(err); 
+        res.send (err)
+    } 
+    else{ 
+        console.log("First function call : ", docs); 
+        res.send (docs)
+    } 
+    });
  }
  )
 
  app.get('/nurse/:id',function(req , res){
-    const id = req.params.id
-    const nurse = {id: "3",
-    nName: "Varsha",
-    dob: "14-04-1992",
-    gender: "female",
-    qualification: "B.Sc_Nursing",
-    experience: "6 Years",
-    appointmentDate: "02-03-2021",
-    address: "4, Murugan Kovil St.,Kottar",
-    number: "8440034190",
-    mailId: "varsha14@gmail.com"}
-     res.send (nurse)
+   const id = req.params.id
+   nurseSchema.find({ id: id }, function (err, docs) {
+     if (err) {
+       console.log(err);
+       res.send(err)
+     }
+     else {
+       console.log("First function call : ", docs);
+       res.send(docs.length ? docs[0] : {})
+     }
+   });
  }
  )
- 
- app.get('/nurse/add/:id',function(req , res){
-     const id = req.params.id
-      res.send (true)
-  }
-  )
- 
-  app.get('/nurse/update/:id',function(req , res){
-     const id = req.params.id
-      res.send (true)
+
+app.post('/nurse/add/:id', function (req, res) {
+  const id = req.params.id
+  var nurse = new nurseSchema(req.body)
+  nurse.save(function (err, result) {
+    if (err) {
+      console.log(err);
+      res.send(err);
+    }
+    else {
+      console.log(result)
+      res.send(result);
+    }
+  })
+}
+)
+
+  app.post('/nurse/update/:id',function(req , res){
+    const id = req.params.id
+    nurseSchema.findOneAndUpdate({ id: id },
+      req.body, null, function (err, docs) {
+        if (err) {
+          console.log(err)
+          res.send(err)
+        }
+        else {
+          console.log("Original Doc : ", docs);
+          res.send(docs)
+        }
+      })
   }
   )
  
   app.get('/nurse/delete/:id',function(req , res){
-     const id = req.params.id
-      res.send (true)
+    const id = req.params.id
+    nurseSchema.deleteOne({ id: id }).then(function () {
+      console.log("Data deleted"); // Success 
+      res.send(true)
+    }).catch(function (error) {
+      console.log(error); // Failure 
+      res.send(error)
+    });
   }
   )
 
   app.get('/patient',function(req , res){
-    const ELEMENT_DATA = [
-        {address: "35, 4th Cross St.",
-      bGroup: "A-",
-      contactNo: "9842555768",
-      covidTesting: "positive",
-      date: "Fri Feb 19 2021",
-      dob: "Thu Jun 24 1982", 
-      fName: "Muthu",
-      gender: "male",
-      hospitalName: "Ganga Hospital",
-      id: "25",
-      pName: "Siva",
-      wardNo: "3"},
-      {address: "35, 4th Cross St.",
-      bGroup: "A-",
-      contactNo: "9842555768",
-      covidTesting: "positive",
-      date: "Fri Feb 19 2021",
-      dob: "Thu Jun 24 1982", 
-      fName: "Muthu",
-      gender: "male",
-      hospitalName: "Ganga Hospital",
-      id: "25",
-      pName: "Siva",
-      wardNo: "3"},
-      {address: "35, 4th Cross St.",
-      bGroup: "A-",
-      contactNo: "9842555768",
-      covidTesting: "positive",
-      date: "Fri Feb 19 2021",
-      dob: "Thu Jun 24 1982", 
-      fName: "Muthu",
-      gender: "male",
-      hospitalName: "Ganga Hospital",
-      id: "25",
-      pName: "Siva",
-      wardNo: "3"}
-      ];
-      
-
-     res.send (ELEMENT_DATA)
+    patientSchema.find({}, function (err, docs) { 
+      if (err){ 
+          console.log(err); 
+          res.send (err)
+      } 
+      else{ 
+          console.log("First function call : ", docs); 
+          res.send (docs)
+      } 
+      });
  }
  )
 
   app.get('/patient/:id',function(req , res){
     const id = req.params.id
-    const patient = {address: "35, 4th Cross St.",
-    bGroup: "A-",
-    contactNo: "9842555768",
-    covidTesting: "positive",
-    date: "Fri Feb 19 2021",
-    dob: "Thu Jun 24 1982", 
-    fName: "Muthu",
-    gender: "male",
-    hospitalName: "Ganga Hospital",
-    id: "25",
-    pName: "Siva",
-    wardNo: "3"}
-     res.send (patient)
+   patientSchema.find({ id: id }, function (err, docs) {
+     if (err) {
+       console.log(err);
+       res.send(err)
+     }
+     else {
+       console.log("First function call : ", docs);
+       res.send(docs.length ? docs[0] : {})
+     }
+   });
  }
  )
  
- app.get('/patient/add/:id',function(req , res){
-     const id = req.params.id
-      res.send (true)
+ app.post('/patient/add/:id',function(req , res){
+  const id = req.params.id
+  var patient = new patientSchema(req.body)
+  patient.save(function (err, result) {
+    if (err) {
+      console.log(err);
+      res.send(err);
+    }
+    else {
+      console.log(result)
+      res.send(result);
+    }
+  })
   }
   )
  
-  app.get('/patient/update/:id',function(req , res){
-     const id = req.params.id
-      res.send (true)
+  app.post('/patient/update/:id',function(req , res){
+    const id = req.params.id
+    patientSchema.findOneAndUpdate({ id: id },
+      req.body, null, function (err, docs) {
+        if (err) {
+          console.log(err)
+          res.send(err)
+        }
+        else {
+          console.log("Original Doc : ", docs);
+          res.send(docs)
+        }
+      })
   }
   )
  
   app.get('/patient/delete/:id',function(req , res){
-     const id = req.params.id
-      res.send (true)
+    const id = req.params.id
+    patientSchema.deleteOne({ id: id }).then(function () {
+      console.log("Data deleted"); // Success 
+      res.send(true)
+    }).catch(function (error) {
+      console.log(error); // Failure 
+      res.send(error)
+    });
   }
   )
 
-  app.get('/reports',function(req , res){
-    const ELEMENT_DATA = [
-        {address: "35, 4th Cross St.",
-      bGroup: "A-",
-      contactNo: "9842555768",
-      covidTesting: "positive",
-      date: "Fri Feb 19 2021",
-      dob: "Thu Jun 24 1982", 
-      fName: "Muthu",
-      gender: "male",
-      hospitalName: "Ganga Hospital",
-      id: "25",
-      pName: "Siva",
-      wardNo: "3"},
-      {address: "35, 4th Cross St.",
-      bGroup: "A-",
-      contactNo: "9842555768",
-      covidTesting: "positive",
-      date: "Fri Feb 19 2021",
-      dob: "Thu Jun 24 1982", 
-      fName: "Muthu",
-      gender: "male",
-      hospitalName: "Ganga Hospital",
-      id: "25",
-      pName: "Siva",
-      wardNo: "3"},
-      {address: "35, 4th Cross St.",
-      bGroup: "A-",
-      contactNo: "9842555768",
-      covidTesting: "positive",
-      date: "Fri Feb 19 2021",
-      dob: "Thu Jun 24 1982", 
-      fName: "Muthu",
-      gender: "male",
-      hospitalName: "Ganga Hospital",
-      id: "25",
-      pName: "Siva",
-      wardNo: "3"}
-      ];
-      
-
-     res.send (ELEMENT_DATA)
- }
- )
+app.get('/reports', function (req, res) {
+  patientSchema.find({}, function (err, docs) {
+    if (err) {
+      console.log(err);
+      res.send(err)
+    }
+    else {
+      console.log("First function call : ", docs);
+      res.send(docs)
+    }
+  });
+}
+)
 
 app.listen(9000, function(req,res){
     console.log('Running...')

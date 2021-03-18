@@ -23,7 +23,7 @@ import { Router,NavigationEnd  } from '@angular/router';
 
   editPatient(data) : void {
     console.log("edit patient",data)
-        this.router.navigate(['/patient/edit'])
+        this.router.navigate(['/patient/edit'],{state: { data: { id: data.id} }})
   }
   
   } 
