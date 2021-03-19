@@ -9,15 +9,16 @@ import { ReportService } from 'src/app/services/report.service'
 })
  export class ReportComponent implements OnInit {
   patientForm: FormGroup;
-  displayedColumns: string[] = ['id','pName','dob','gender','fName','bGroup','address','number','hospitalName','wardNo','covidTesting','date'];
+  displayedColumns: string[] = ['id','pName','dob','gender','fName','bGroup','address','number','hospitalName','wardNo','covidTesting','date','homeQuarantine','deceased'];
   dataSource = [];
   
   constructor(private formBuilder: FormBuilder, private reportService: ReportService) { }
   
   ngOnInit(): void {
-    this.initializeForm();
-    this.reportService.getreportList().subscribe(reportList => {
-      this.dataSource = reportList;
+    this.initializeForm();    
+    this.fetchData();
+    this.patientForm.valueChanges.subscribe(res => {
+      this.fetchData();
     })
   }
   initializeForm(): void {
@@ -29,6 +30,12 @@ import { ReportService } from 'src/app/services/report.service'
       death: [false],
          })
   }
+  fetchData(){
+    this.reportService.getreportList(this.patientForm.value).subscribe(reportList => {
+      this.dataSource = reportList;
+    })
+  }
+
   toggleCheckBox(fieldName,status): void{ 
     console.log("positive",fieldName,status) 
     this.patientForm.get(fieldName).setValue(status)

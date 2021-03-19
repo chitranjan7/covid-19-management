@@ -69,6 +69,8 @@ initializeForm(patientData): void {
     wardNo: [''||patientData.wardNo],
     covidTesting: [''||patientData.covidTesting],
     date: [''||patientData.date],
+    homeQuarantine: [''||patientData.homeQuarantine],
+    deceased: [''||patientData.deceased],
   })
 }
 
@@ -79,4 +81,10 @@ deletePatient() : void {
   })
 
 }
+
+toggleCheckBox(fieldName,status): void{ 
+  console.log("positive",fieldName,status) 
+  this.patientForm.get(fieldName).setValue(status)
+  console.log(this.patientForm)
+} 
 }

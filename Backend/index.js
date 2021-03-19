@@ -51,7 +51,7 @@ const patientSchema = mongoose.model('patient', {
   address: { type: String },
   bGroup: { type: String },
   contactNo: { type: String },
-  covidTesting: { type: String },
+  covidTesting: { type: Boolean },
   date: { type: String },
   dob: { type: String }, 
   fName: { type: String },
@@ -59,7 +59,9 @@ const patientSchema = mongoose.model('patient', {
   hospitalName: { type: String },
   id: { type: String },
   pName: { type: String },
-  wardNo: { type: String }
+  wardNo: { type: String },
+  homeQuarantine: { type: Boolean },
+  deceased: { type: Boolean }
 })
 
 app.get('/doctor',function(req , res){
@@ -283,8 +285,15 @@ app.post('/nurse/add/:id', function (req, res) {
   }
   )
 
-app.get('/reports', function (req, res) {
-  patientSchema.find({}, function (err, docs) {
+app.post('/reports', function (req, res) {
+  var filter = {
+    ...req.body.admit && {date: req.body.admit},
+    ...req.body.positive && {covidTesting: req.body.positive},
+    ...req.body.homeQuarantine && {homeQuarantine: req.body.homeQuarantine},
+    ...req.body.death && {death: req.body.death},
+  }
+  console.log('filter',filter);
+  patientSchema.find(filter, function (err, docs) {
     if (err) {
       console.log(err);
       res.send(err)

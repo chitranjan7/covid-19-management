@@ -24,7 +24,9 @@ import { NurseFormComponent } from './nurse-form/nurse-form.component';
 import { PatientFormComponent } from './patient-form/patient-form.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {HttpClientModule} from '@angular/common/http';
-import { HeaderComponent } from './header/header.component'
+import { HeaderComponent } from './header/header.component';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatMenuModule} from '@angular/material/menu';
 
 @NgModule({
   declarations: [
@@ -55,7 +57,9 @@ import { HeaderComponent } from './header/header.component'
     MatTableModule,
     MatCheckboxModule,
     HttpClientModule,
-    MatInputModule
+    MatInputModule,
+    MatSlideToggleModule,
+    MatMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent]

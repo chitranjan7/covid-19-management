@@ -78,4 +78,10 @@ export class DoctorFormComponent implements OnInit {
 
   }
 
+  toggleCheckBox(fieldName,status): void{ 
+    console.log("positive",fieldName,status) 
+    this.doctorForm.get(fieldName).setValue(status)
+    console.log(this.doctorForm)
+  } 
+
 }

@@ -9,7 +9,8 @@ export class ReportService {
 
   constructor(private http: HttpClient) { }
 
-  getreportList(): Observable <any> {
-    return this.http.get('http://localhost:9000/reports')
+  getreportList(data): Observable <any> {
+    console.log('data',data)
+    return this.http.post('http://localhost:9000/reports', data)
   }
 }

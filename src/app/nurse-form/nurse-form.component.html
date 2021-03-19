@@ -15,10 +15,11 @@
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
-          <mat-form-field class="example-full-width">
+          <mat-radio-group formControlName="gender" aria-label="Select an option">
             <mat-label>Gender</mat-label>
-            <input matInput formControlName="gender" >
-          </mat-form-field>
+            <mat-radio-button value="male">Male</mat-radio-button>
+            <mat-radio-button value="female">Female</mat-radio-button>
+          </mat-radio-group>
           <mat-form-field class="example-full-width">
             <mat-label>Qualification</mat-label>
             <input matInput formControlName="qualification" >
