@@ -17,7 +17,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { MatNativeDateModule } from '@angular/material/core';
-import { MatRadioModule } from '@angular/material/radio';
+import { MatRadioModule, MAT_RADIO_DEFAULT_OPTIONS } from '@angular/material/radio';
 import {MatTable, MatTableModule} from '@angular/material/table';
 import { DoctorFormComponent } from './doctor-form/doctor-form.component';
 import { NurseFormComponent } from './nurse-form/nurse-form.component';
@@ -61,7 +61,10 @@ import {MatMenuModule} from '@angular/material/menu';
     MatSlideToggleModule,
     MatMenuModule
   ],
-  providers: [],
+  providers: [{
+    provide: MAT_RADIO_DEFAULT_OPTIONS,
+    useValue: { color: 'primary' },
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
