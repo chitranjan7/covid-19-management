@@ -23,7 +23,7 @@
         </mat-form-field>
         <mat-form-field class="example-full-width">
             <mat-label>DOB</mat-label>
-            <input matInput [matDatepicker]="picker" formControlName="dob" >
+            <input matInput [matDatepicker]="picker" [max]="maxDate" formControlName="dob" >
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
             <mat-error *ngIf="nurseForm.get('dob').hasError('required')">
@@ -96,7 +96,7 @@
       <div class="buttonContainer">
         <button mat-raised-button color="primary" class="formBtn" (click)="submit()" [disabled]="nurseForm.status !== 'VALID'">Submit</button>
         <button mat-raised-button color="primary" class="formBtn" (click)="initializeForm({})">Reset</button>
-        <button mat-raised-button color="primary" class="formBtn" (click)="deleteNurse()">Delete</button>
+        <button mat-raised-button color="primary" class="formBtn" (click)="deleteNurse()" *ngIf="formType == 'edit'">Delete</button>
         <button mat-raised-button color="primary" class="formBtn" [routerLink]="['/nurse']">Cancel</button>
       </div>
 </div>

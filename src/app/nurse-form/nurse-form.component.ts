@@ -12,8 +12,10 @@ export class NurseFormComponent implements OnInit {
   nurseForm: FormGroup;
   formType: string;
   id: string = null;
+  maxDate; 
   constructor(private formBuilder: FormBuilder,private nurseService: NurseService, private router: Router) { 
     const state = this.router.getCurrentNavigation().extras.state;
+    this.maxDate = new Date('12/30/1995');
     router.events
           .subscribe(event => 
            {

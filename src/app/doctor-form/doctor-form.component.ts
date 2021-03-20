@@ -12,9 +12,10 @@ export class DoctorFormComponent implements OnInit {
   doctorForm: FormGroup;
   formType: string;
   id: string = null;
+  maxDate; 
   constructor(private formBuilder: FormBuilder,private doctorService:DoctorService,private router: Router) {
     const state = this.router.getCurrentNavigation().extras.state;
-    
+    this.maxDate = new Date('12/30/1995');
     router.events
       .subscribe(event => {
         if (event instanceof NavigationEnd) {
