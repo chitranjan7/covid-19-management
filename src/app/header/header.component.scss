@@ -64,6 +64,10 @@
     text-decoration: none;
 }
 
+.link:hover {
+    border-bottom: 2px solid white;
+  }
+
 .link:focus {
     outline: 0;
   }

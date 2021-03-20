@@ -54,15 +54,15 @@ export class NurseFormComponent implements OnInit {
     }
     initializeForm(nurseData): void {
       this.nurseForm = this.formBuilder.group({
-        id: [''||nurseData.id, Validators.required],
-        nName: [''||nurseData.nName, Validators.required],
+        id: [''||nurseData.id, [Validators.required, Validators.pattern(/^\d*$/)]],
+        nName: [''||nurseData.nName, [Validators.required, Validators.pattern(/^[a-zA-Z]*$/)]],
         dob: [''||nurseData.dob, Validators.required],
         gender: [''||nurseData.gender, Validators.required],
         qualification: [''||nurseData.qualification, Validators.required],
         experience: [''||nurseData.experience, Validators.required],
         appointmentDate: [''||nurseData.appointmentDate, Validators.required],
         address: [''||nurseData.address, Validators.required],
-        number: [''||nurseData.number, Validators.required],
+        number: [''||nurseData.number, [Validators.required, Validators.pattern(/^\d*$/), Validators.maxLength(10)]],
         mailId: [''||nurseData.mailId, Validators.required],
       })
 }

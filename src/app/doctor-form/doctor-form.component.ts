@@ -55,8 +55,8 @@ export class DoctorFormComponent implements OnInit {
   }
   initializeForm(doctorData): void {
     this.doctorForm = this.formBuilder.group({
-      id: [''||doctorData.id, Validators.required],
-      dName: [''||doctorData.dName, Validators.required],
+      id: [''||doctorData.id, [Validators.required, Validators.pattern(/^\d*$/)]],
+      dName: [''||doctorData.dName, [Validators.required, Validators.pattern(/^[a-zA-Z]*$/)]],
       dob: [''||doctorData.dob, Validators.required],
       gender: [''||doctorData.gender, Validators.required],
       qualification: [''||doctorData.qualification, Validators.required],
@@ -64,7 +64,7 @@ export class DoctorFormComponent implements OnInit {
       experience: [''||doctorData.experience, Validators.required],
       appointmentDate: [''||doctorData.appointmentDate, Validators.required],
       address: [''||doctorData.address, Validators.required],
-      number: [''||doctorData.number, Validators.required],
+      number: [''||doctorData.number, [Validators.required, Validators.pattern(/^\d*$/), Validators.maxLength(10)]],
       mailId: [''||doctorData.mailId, Validators.required],
     })
   }

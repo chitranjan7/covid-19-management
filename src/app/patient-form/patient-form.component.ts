@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {PatientService} from 'src/app/services/patient.service'
 import { Router,NavigationEnd  } from '@angular/router';
 
@@ -57,20 +57,20 @@ export class PatientFormComponent implements OnInit {
 }
 initializeForm(patientData): void {
   this.patientForm = this.formBuilder.group({
-    id: [''||patientData.id],
-    pName: [''||patientData.pName],
-    dob: [''||patientData.dob],
-    gender: [''||patientData.gender],
-    fName: [''||patientData.fName],
-    bGroup: [''||patientData.bGroup],
-    address: [''||patientData.address],
-    contactNo: [''||patientData.contactNo],
-    hospitalName: [''||patientData.hospitalName],
-    wardNo: [''||patientData.wardNo],
-    covidTesting: [''||patientData.covidTesting],
-    date: [''||patientData.date],
-    homeQuarantine: [''||patientData.homeQuarantine],
-    deceased: [''||patientData.deceased],
+    id: [''||patientData.id, [Validators.required, Validators.pattern(/^\d*$/)]],
+    pName: [''||patientData.pName, [Validators.required, Validators.pattern(/^[a-zA-Z]*$/)]],
+    dob: [''||patientData.dob, Validators.required],
+    gender: [''||patientData.gender, Validators.required],
+    fName: [''||patientData.fName, [Validators.required, Validators.pattern(/^[a-zA-Z]*$/)]],
+    bGroup: [''||patientData.bGroup, Validators.required],
+    address: [''||patientData.address, Validators.required],
+    contactNo: [''||patientData.contactNo, [Validators.required, Validators.pattern(/^\d*$/), Validators.maxLength(10)]],
+    hospitalName: [''||patientData.hospitalName, Validators.required],
+    wardNo: [''||patientData.wardNo, Validators.required],
+    covidTesting: [''||patientData.covidTesting, Validators.required],
+    date: [''||patientData.date, Validators.required],
+    homeQuarantine: [false||patientData.homeQuarantine],
+    deceased: [false||patientData.deceased],
   })
 }
 
@@ -85,6 +85,10 @@ deletePatient() : void {
 toggleCheckBox(fieldName,status): void{ 
   console.log("positive",fieldName,status) 
   this.patientForm.get(fieldName).setValue(status)
+  if(fieldName === "homeQuarantine" && status)
+    this.patientForm.get('deceased').setValue(false)
+  if(fieldName === "deceased" && status)
+    this.patientForm.get('homeQuarantine').setValue(false)
   console.log(this.patientForm)
 } 
 }

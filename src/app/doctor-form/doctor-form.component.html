@@ -6,6 +6,9 @@
           <mat-error *ngIf="doctorForm.get('id').hasError('required')">
             ID is <strong>required</strong>
           </mat-error>
+          <mat-error *ngIf="doctorForm.get('id').hasError('pattern')">
+            ID must be <strong>numbers</strong>
+          </mat-error>
         </mat-form-field>
       
         <mat-form-field class="example-full-width">
@@ -13,6 +16,9 @@
           <input matInput formControlName="dName" >
           <mat-error *ngIf="doctorForm.get('dName').hasError('required')">
             Name is <strong>required</strong>
+          </mat-error>
+          <mat-error *ngIf="doctorForm.get('dName').hasError('pattern')">
+            Name must be <strong>letters</strong>
           </mat-error>
         </mat-form-field>
         <mat-form-field class="example-full-width">
@@ -78,6 +84,12 @@
             <input matInput formControlName="number" >
             <mat-error *ngIf="doctorForm.get('number').hasError('required')">
               Number is <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf="doctorForm.get('number').hasError('pattern')">
+              Number must be <strong>numbers</strong>
+            </mat-error>
+            <mat-error *ngIf="doctorForm.get('number').hasError('maxlength')">
+              Number max length is <strong>10</strong>
             </mat-error>
           </mat-form-field>
           <mat-form-field class="example-full-width">

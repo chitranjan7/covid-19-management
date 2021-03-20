@@ -6,6 +6,9 @@
           <mat-error *ngIf="nurseForm.get('id').hasError('required')">
             ID is <strong>required</strong>
           </mat-error>
+          <mat-error *ngIf="nurseForm.get('id').hasError('pattern')">
+            ID must be <strong>numbers</strong>
+          </mat-error>
         </mat-form-field>
 
         <mat-form-field class="example-full-width">
@@ -13,6 +16,9 @@
           <input matInput formControlName="nName" >
           <mat-error *ngIf="nurseForm.get('nName').hasError('required')">
             Name is <strong>required</strong>
+          </mat-error>
+          <mat-error *ngIf="nurseForm.get('nName').hasError('pattern')">
+            Name must be <strong>letters</strong>
           </mat-error>
         </mat-form-field>
         <mat-form-field class="example-full-width">
@@ -66,7 +72,13 @@
             <mat-label>Number</mat-label>
             <input matInput formControlName="number" >
             <mat-error *ngIf="nurseForm.get('number').hasError('required')">
-              Email is <strong>required</strong>
+              Number is <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf="nurseForm.get('number').hasError('pattern')">
+              Number must be <strong>numbers</strong>
+            </mat-error>
+            <mat-error *ngIf="nurseForm.get('number').hasError('maxlength')">
+              Number max length is <strong>10</strong>
             </mat-error>
           </mat-form-field>
           <mat-form-field class="example-full-width">
