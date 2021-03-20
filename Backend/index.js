@@ -288,9 +288,12 @@ app.post('/nurse/add/:id', function (req, res) {
 app.post('/reports', function (req, res) {
   var filter = {
     ...req.body.admit && {date: req.body.admit},
-    ...req.body.positive && {covidTesting: req.body.positive},
     ...req.body.homeQuarantine && {homeQuarantine: req.body.homeQuarantine},
-    ...req.body.death && {death: req.body.death},
+    ...req.body.deceased && {deceased: req.body.deceased},
+    $or: [
+      { covidTesting: req.body.positive },
+      { covidTesting: !req.body.negative }
+    ]
   }
   console.log('filter',filter);
   patientSchema.find(filter, function (err, docs) {
@@ -299,7 +302,7 @@ app.post('/reports', function (req, res) {
       res.send(err)
     }
     else {
-      console.log("First function call : ", docs);
+      // console.log("First function call : ", docs);
       res.send(docs)
     }
   });

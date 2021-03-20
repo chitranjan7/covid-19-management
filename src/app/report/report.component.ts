@@ -27,7 +27,7 @@ import { ReportService } from 'src/app/services/report.service'
       positive: [false],
       negative: [false],
       homeQuarantine: [false],
-      death: [false],
+      deceased: [false],
          })
   }
   fetchData(){

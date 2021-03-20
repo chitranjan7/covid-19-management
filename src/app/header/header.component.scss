@@ -8,9 +8,29 @@
     background: rgb(255,255,255);
     background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgb(217 217 217) 100%);
     margin-bottom: 10px;
-    background-image: url(https://assets.publishing.service.gov.uk/government/uploads/system/uploads/image_data/file/66746/s960_hospital_operating_theatre.jpg);
+    background-image: url("../../assets/img/hospital.jpg");
+    object-fit: contain;
+    background-size: 100vw auto;
+    background-position: center;
     clip-path: polygon(0 0, 0 79vw, 0vh 236px, 315vw 0);
 }
+
+.doctorHeader{
+    background-image: url("../../assets/img/doctors.jpg");
+}
+
+.nurseHeader{
+    background-image: url("../../assets/img/nurses.jpg");
+}
+
+.patientHeader{
+    background-image: url("../../assets/img/patients.jpg");
+}
+
+.reportHeader{
+    background-image: url("../../assets/img/reports.jpg");
+}
+
 
 .headerContentWrapper{
     display: flex;
@@ -44,9 +64,26 @@
     text-decoration: none;
 }
 
+.link:focus {
+    outline: 0;
+  }
+
 .logo {
     width: 100px;
     margin-left: 10px;
     margin-top: 50px;
     cursor: pointer;
+}
+
+
+.logo:focus {
+    outline: 0;
+  }
+
+.currentLink {
+    border-bottom: 2px solid white;
+}
+
+.linksDisable{
+    display: none;
 }

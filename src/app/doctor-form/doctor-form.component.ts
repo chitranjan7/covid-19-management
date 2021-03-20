@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {DoctorService} from 'src/app/services/doctor.service';
 import { Router,NavigationEnd  } from '@angular/router';
 
@@ -55,17 +55,17 @@ export class DoctorFormComponent implements OnInit {
   }
   initializeForm(doctorData): void {
     this.doctorForm = this.formBuilder.group({
-      id: [''||doctorData.id],
-      dName: [''||doctorData.dName],
-      dob: [''||doctorData.dob],
-      gender: [''||doctorData.gender],
-      qualification: [''||doctorData.qualification],
-      specialist: [''||doctorData.specialist],
-      experience: [''||doctorData.experience],
-      appointmentDate: [''||doctorData.appointmentDate],
-      address: [''||doctorData.address],
-      number: [''||doctorData.number],
-      mailId: [''||doctorData.mailId],
+      id: [''||doctorData.id, Validators.required],
+      dName: [''||doctorData.dName, Validators.required],
+      dob: [''||doctorData.dob, Validators.required],
+      gender: [''||doctorData.gender, Validators.required],
+      qualification: [''||doctorData.qualification, Validators.required],
+      specialist: [''||doctorData.specialist, Validators.required],
+      experience: [''||doctorData.experience, Validators.required],
+      appointmentDate: [''||doctorData.appointmentDate, Validators.required],
+      address: [''||doctorData.address, Validators.required],
+      number: [''||doctorData.number, Validators.required],
+      mailId: [''||doctorData.mailId, Validators.required],
     })
   }
   deleteDoctor() : void {

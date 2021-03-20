@@ -1,4 +1,10 @@
-<div class="headerContainer">
+<div [ngClass]="{
+    'headerContainer': true, 
+    'doctorHeader': currentLink === 'doctor',
+    'nurseHeader': currentLink === 'nurse',
+    'patientHeader': currentLink === 'patient',
+    'reportHeader': currentLink === 'report'
+}">
     <div class="overlay"></div>
     <div class="headerContentWrapper">
         <div class="headerContent">
@@ -7,11 +13,12 @@
                 src="https://seeklogo.com/images/H/hospital-clinic-plus-logo-7916383C7A-seeklogo.com.png"
                 [routerLink]="['/']"
             >
-            <div class="linksContainer">
-                <div class="link" [routerLink]="['/doctor']">Doctor</div>
-                <div class="link" [routerLink]="['/nurse']">Nurse</div>
-                <div class="link" [routerLink]="['/patient']">Patient</div>
-                <div class="link" [routerLink]="['/report']">Report</div>
+            <div [ngClass]="{'linksContainer': true, 'linksDisable': currentLink === 'login'}">
+                <div [ngClass]="{'link': true, 'currentLink': currentLink === 'doctor'}" [routerLink]="['/doctor']">Doctor</div>
+                <div [ngClass]="{'link': true, 'currentLink': currentLink === 'nurse'}" [routerLink]="['/nurse']">Nurse</div>
+                <div [ngClass]="{'link': true, 'currentLink': currentLink === 'patient'}" [routerLink]="['/patient']">Patient</div>
+                <div [ngClass]="{'link': true, 'currentLink': currentLink === 'report'}" [routerLink]="['/report']">Report</div>
+                <div [ngClass]="{'link': true}" [routerLink]="['/login']">Log Out</div>
             </div>
         </div>
     </div>

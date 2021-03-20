@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {NurseService} from 'src/app/services/nurse.service'
 import { Router,NavigationEnd  } from '@angular/router';
 
@@ -54,16 +54,16 @@ export class NurseFormComponent implements OnInit {
     }
     initializeForm(nurseData): void {
       this.nurseForm = this.formBuilder.group({
-        id: [''||nurseData.id],
-        nName: [''||nurseData.nName],
-        dob: [''||nurseData.dob],
-        gender: [''||nurseData.gender],
-        qualification: [''||nurseData.qualification],
-        experience: [''||nurseData.experience],
-        appointmentDate: [''||nurseData.appointmentDate],
-        address: [''||nurseData.address],
-        number: [''||nurseData.number],
-        mailId: [''||nurseData.mailId],
+        id: [''||nurseData.id, Validators.required],
+        nName: [''||nurseData.nName, Validators.required],
+        dob: [''||nurseData.dob, Validators.required],
+        gender: [''||nurseData.gender, Validators.required],
+        qualification: [''||nurseData.qualification, Validators.required],
+        experience: [''||nurseData.experience, Validators.required],
+        appointmentDate: [''||nurseData.appointmentDate, Validators.required],
+        address: [''||nurseData.address, Validators.required],
+        number: [''||nurseData.number, Validators.required],
+        mailId: [''||nurseData.mailId, Validators.required],
       })
 }
 deleteNurse() : void {

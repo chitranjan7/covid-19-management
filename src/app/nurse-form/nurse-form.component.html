@@ -3,53 +3,86 @@
         <mat-form-field class="example-full-width">
           <mat-label>ID</mat-label>
           <input matInput formControlName="id"  >
+          <mat-error *ngIf="nurseForm.get('id').hasError('required')">
+            ID is <strong>required</strong>
+          </mat-error>
         </mat-form-field>
 
         <mat-form-field class="example-full-width">
           <mat-label>Name</mat-label>
           <input matInput formControlName="nName" >
+          <mat-error *ngIf="nurseForm.get('nName').hasError('required')">
+            Name is <strong>required</strong>
+          </mat-error>
         </mat-form-field>
         <mat-form-field class="example-full-width">
             <mat-label>DOB</mat-label>
             <input matInput [matDatepicker]="picker" formControlName="dob" >
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
+            <mat-error *ngIf="nurseForm.get('dob').hasError('required')">
+              Date of Birth is <strong>required</strong>
+            </mat-error>
           </mat-form-field>
           <mat-radio-group formControlName="gender" aria-label="Select an option">
             <mat-label>Gender</mat-label>
             <mat-radio-button value="male">Male</mat-radio-button>
             <mat-radio-button value="female">Female</mat-radio-button>
+            <mat-error *ngIf="nurseForm.get('gender').hasError('required')">
+              Gender is <strong>required</strong>
+            </mat-error>
           </mat-radio-group>
           <mat-form-field class="example-full-width">
             <mat-label>Qualification</mat-label>
             <input matInput formControlName="qualification" >
+            <mat-error *ngIf="nurseForm.get('qualification').hasError('required')">
+              Qualification is <strong>required</strong>
+            </mat-error>
           </mat-form-field>
           <mat-form-field class="example-full-width">
          <mat-label>Experience</mat-label>
             <input matInput formControlName="experience" >
+            <mat-error *ngIf="nurseForm.get('experience').hasError('required')">
+              Experience is <strong>required</strong>
+            </mat-error>
           </mat-form-field>
           <mat-form-field class="example-full-width">
             <mat-label>Appointment Date</mat-label>
             <input matInput [matDatepicker]="appDatePicker" formControlName="appointmentDate" >
             <mat-datepicker-toggle matSuffix [for]="appDatePicker"></mat-datepicker-toggle>
             <mat-datepicker #appDatePicker></mat-datepicker>
+            <mat-error *ngIf="nurseForm.get('appointmentDate').hasError('required')">
+              Appointment Date is <strong>required</strong>
+            </mat-error>
           </mat-form-field>
           <mat-form-field class="example-full-width">
             <mat-label>Address</mat-label>
             <input matInput formControlName="address" >
+            <mat-error *ngIf="nurseForm.get('address').hasError('required')">
+              Address is <strong>required</strong>
+            </mat-error>
           </mat-form-field>
           <mat-form-field class="example-full-width">
             <mat-label>Number</mat-label>
             <input matInput formControlName="number" >
+            <mat-error *ngIf="nurseForm.get('number').hasError('required')">
+              Email is <strong>required</strong>
+            </mat-error>
           </mat-form-field>
           <mat-form-field class="example-full-width">
             <mat-label>E-mail</mat-label>
-            <input matInput formControlName="mailId" >
+            <input matInput formControlName="mailId" type="email" email>
+            <mat-error *ngIf="nurseForm.get('mailId').hasError('email') && !nurseForm.get('mailId').hasError('required')">
+              Please enter a valid email address
+            </mat-error>
+            <mat-error *ngIf="nurseForm.get('mailId').hasError('required')">
+              Email is <strong>required</strong>
+            </mat-error>
           </mat-form-field>
         
       </form>      
       <div class="buttonContainer">
-        <button mat-raised-button color="primary" class="formBtn" (click)="submit()">Submit</button>
+        <button mat-raised-button color="primary" class="formBtn" (click)="submit()" [disabled]="nurseForm.status !== 'VALID'">Submit</button>
         <button mat-raised-button color="primary" class="formBtn" (click)="initializeForm({})">Reset</button>
         <button mat-raised-button color="primary" class="formBtn" (click)="deleteNurse()">Delete</button>
         <button mat-raised-button color="primary" class="formBtn" [routerLink]="['/nurse']">Cancel</button>
