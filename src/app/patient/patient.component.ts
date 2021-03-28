@@ -10,7 +10,7 @@ import { Router,NavigationEnd  } from '@angular/router';
 })
  export class PatientComponent implements OnInit {
 
-  displayedColumns: string[] = ['id','pName','dob','gender','fName','bGroup','address','number','hospitalName','wardNo','covidTesting','date','homeQuarantine','deceased'];
+  displayedColumns: string[] = ['id','pName','dob','gender','fName','bGroup','address','contactNumber','hospitalName','wardNo','covidTesting','date','homeQuarantine','deceased'];
   dataSource = [];
   constructor(private patientService: PatientService, private router: Router) { }
   

@@ -49,8 +49,21 @@
             <mat-label>Specialist</mat-label>
                <button mat-button [matMenuTriggerFor]="menu">{{doctorForm.get('specialist').value || 'click'}}</button>
                <mat-menu #menu="matMenu">
-                 <button mat-menu-item (click)="toggleCheckBox('specialist','O +ve')">O +ve</button>
-                 <button mat-menu-item (click)="toggleCheckBox('specialist','B +ve')">B +ve</button>
+                 <button mat-menu-item (click)="toggleCheckBox('specialist','Neurologist')">Neurologist</button>
+                 <button mat-menu-item (click)="toggleCheckBox('specialist','ENT specialist')">ENT specialist</button>
+                 <button mat-menu-item (click)="toggleCheckBox('specialist','Cardiologist')">Cardiologist</button>
+                 <button mat-menu-item (click)="toggleCheckBox('specialist','Audiologist')">Audiologist</button>
+                 <button mat-menu-item (click)="toggleCheckBox('specialist','Gynaecologist')">Gynaecologist</button>
+                 <button mat-menu-item (click)="toggleCheckBox('specialist','Paediatrician')">Paediatrician</button>
+                 <button mat-menu-item (click)="toggleCheckBox('specialist','Radiologist')">Radiologist</button>
+                 <button mat-menu-item (click)="toggleCheckBox('specialist','Pulmonologist')">Pulmonologist</button>
+                 <button mat-menu-item (click)="toggleCheckBox('specialist','Endocrinologist')">Endocrinologist</button>
+                 <button mat-menu-item (click)="toggleCheckBox('specialist','Oncologist')">Oncologist</button>
+                 <button mat-menu-item (click)="toggleCheckBox('specialist','Dermatologists')">Dermatologists</button>
+                 <button mat-menu-item (click)="toggleCheckBox('specialist','Hematologists')">Hematologists</button>
+                 <button mat-menu-item (click)="toggleCheckBox('specialist','Internists')">Internists</button>
+                 <button mat-menu-item (click)="toggleCheckBox('specialist','Osteopaths')">Osteopaths</button>
+                 <button mat-menu-item (click)="toggleCheckBox('specialist','Pulmonologists')">Pulmonologists</button>
                </mat-menu>
                <mat-error *ngIf="doctorForm.get('specialist').hasError('required')">
                 Specialist is <strong>required</strong>
